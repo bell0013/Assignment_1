@@ -23,3 +23,7 @@ library(gridExtra)
 ai_data <- read.csv("ai_numbers.csv", check.names = FALSE)
 summary(ai_data)
 ```
+
+## Research Question:
+
+What is the trend of AI patents worldwide? Which countries are creating the most per capita?

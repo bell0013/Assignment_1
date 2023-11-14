@@ -5,10 +5,21 @@ date: "2023-11-09"
 output: html_document
 ---
 
-```{r setup, include=TRUE}
-ai_data <- read.csv("ai_numbers.csv", check.names = FALSE)
+```{r Chunk 1 , message = FALSE, warning = FALSE, eval = FALSE}
+library(tidyverse)
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+library(readr)
+library(kableExtra)
+library(ggplot2)
+library(lubridate)
+library(gridExtra)
+
 ```
 
 ```{r ai}
+
+ai_data <- read.csv("ai_numbers.csv", check.names = FALSE)
 summary(ai_data)
 ```

@@ -47,7 +47,7 @@ The data is transformed by pivoting the table so that it has 4 columns:
 The variables found within are numerical ppm. These are rounded to 3 decimal places for readability purposes.
 
 ```{r}
-ai_data <- read.csv("ai_numbers.csv", check.names = FALSE)
+ai_data <- read.csv("Data/ai_numbers.csv", check.names = FALSE)
 ai_data$`2010` <- round(ai_data$`2010`, 3)
 ai_data$`2015` <- round(ai_data$`2015`, 3)
 ai_data$`2020` <- round(ai_data$`2020`, 3)

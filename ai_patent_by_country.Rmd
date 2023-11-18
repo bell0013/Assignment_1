@@ -56,15 +56,45 @@ kable(ai_data)
 ```
 
   
-### Data set description:
-
+### Data set description:  
+  
 ``` {r, echo=FALSE}
 paste("The dataset contains", ncol(ai_data), "variables and", nrow(ai_data), "observations.")
 
 ```
 
-##### Screenshot of code used to creat the above command:
-
+##### Screenshot of code used to creat the above command:  
+  
 ```{r, echo=FALSE}
 knitr::include_graphics("Description_code.PNG")
 ```
+
+##### Show the first rows of data and their variable types:  
+  
+```{r}
+str(ai_data)
+```
+
+### Data Summary:
+
+```{r}
+ai_data$min_value <- apply(ai_data[, c("2010", "2015", "2020")], 1, min)
+ai_data$max_value <- apply(ai_data[, c("2010", "2015", "2020")], 1, max)
+ai_data$mean_value <- round(rowMeans(ai_data[, c("2010", "2015", "2020")]), 2)
+
+result <- data.frame(
+  Country = ai_data$Country,
+  Min = ai_data$min_value,
+  Max = ai_data$max_value,
+  Mean = ai_data$mean_value)
+
+top_10_stats <- head(result[order(result$Mean, decreasing = TRUE), ], 5)
+
+kable(top_10_stats, format = "html", col.names = c("Country", "Min", "Max", "Mean"), caption = "Top 10 Countries by Mean AI Patents", 
+      align = c('l', 'c', 'c', 'c')) %>%
+  
+kable_styling(full_width = FALSE)
+
+```
+
+This data is showing the min, max and mean of the data values shown for the top 5 countries sorted by mean patent count. Something of note here is that the rate of change seems to be more significant for South Korea. Where the other nations follow about a 10x increase, South Korea is increasing at a rate of **almost** 40x.

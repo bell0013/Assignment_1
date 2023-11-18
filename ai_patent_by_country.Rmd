@@ -5,7 +5,7 @@ date: "2023-11-09"
 output: html_document
 ---
 
-```{r Chunk 1 , message = FALSE, warning = FALSE, eval = FALSE}
+```{r Chunk 1 , include=FALSE}
 library(tidyverse)
 library(rmarkdown)
 library(knitr)
@@ -18,12 +18,47 @@ library(gridExtra)
 
 ```
 
-```{r ai}
+### Research Question:
 
+What is the trend of AI patents worldwide? Which countries are creating the most per capita and what is the trend of those specific countries?
+
+### Data Set:
+
+This data set is retrieved from [ourworldindata.org](https://ourworldindata.org/grapher/artificial-intelligence-patents-submitted-per-million). The data set originally consists of 4 columns:  
+  
+1) Entity eg. Australia  
+  
+2) Code eg. AUS  
+  
+3) Year eg. 2015  
+  
+4) Patents per million (from here known as ppm)
+
+The data is transformed by pivoting the table so that it has 4 columns:
+
+1) Country 
+  
+2) Patents in 2010
+  
+3) Patents in 2015
+  
+4) Patents in 2020
+
+The variables found within are numerical ppm. These are rounded to 3 decimal places for readability purposes.
+
+```{r}
 ai_data <- read.csv("ai_numbers.csv", check.names = FALSE)
-summary(ai_data)
+ai_data$`2010` <- round(ai_data$`2010`, 3)
+ai_data$`2015` <- round(ai_data$`2015`, 3)
+ai_data$`2020` <- round(ai_data$`2020`, 3)
+
+kable(ai_data)
 ```
 
-## Research Question:
+  
+### Data set description:
 
-What is the trend of AI patents worldwide? Which countries are creating the most per capita?
+``` {r, echo=FALSE}
+paste("The dataset contains", ncol(ai_data), "variables and", nrow(ai_data), "observations.")
+
+```

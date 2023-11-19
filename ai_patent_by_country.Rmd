@@ -44,7 +44,7 @@ The data is transformed by pivoting the table so that it has 4 columns:
   
 4) Patents in 2020
 
-The variables found within are numerical ppm. These are rounded to 3 decimal places for readability purposes.
+The variables found within are numerical ppm. These are rounded to 2 decimal places for readability purposes.
 
 ```{r}
 ai_data <- read.csv("Data/ai_numbers.csv", check.names = FALSE)
@@ -87,10 +87,8 @@ result <- data.frame(
   Mean = round(rowMeans(ai_data[, c("2010", "2015", "2020")]), 2)
 )
 
-# Retrieve top 5 stats
 top_5_stats <- head(result[order(result$Mean, decreasing = TRUE), ], 5)
 
-# Generate HTML table using kable and kable_styling
 kable(top_5_stats, format = "html", col.names = c("Country", "Min", "Max", "Mean"), caption = "Top 10 Countries by Mean AI Patents", 
       align = c('l', 'c', 'c', 'c')) %>%
 kable_styling(full_width = FALSE)
@@ -154,12 +152,8 @@ ggplot(combined_data, aes(x = Year, y = Patents, color = Country, group = Countr
 
 Based on this data and the following figure we can conclude that AI Patents are ramping up over time in many developed countries. While the world as a whole is ramping up significantly as time goes on, South Korea is evidently a world leader in exploration and development of AI technologies.
 
+A note is that with the knowledge of the lack of full statistics, the World trend could be inaccurate and could well be lower or higher. This can be thought of as inconclusive since the data is not trustworthy for the World measurement.
+
 Something to keep in mind is that these statistics are measuring against each other in patents per million people (ppmp). Countries like China and India who have orders of magnitude more people than countries like Australia or South Korea are likely to have far more patents coming from their shores as raw numbers. 
 
-Looking at ppmp is interesting because it shows how a percentage of a population percieves AI and how tech focused that country is as a whole compared to others who may show less interest in developing AI technology in the future.
-
-
-```{r}
-
-
-```
+Looking at ppmp is interesting because it shows how a percentage of a population perceives AI and how tech focused that country is as a whole compared to others who may show less interest in developing AI technology in the future.
